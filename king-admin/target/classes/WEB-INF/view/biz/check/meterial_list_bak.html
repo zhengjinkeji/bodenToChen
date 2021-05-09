@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>博登</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <!-- 含有popper的bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <!-- 动画 -->
+    <script src="https://cdn.bootcss.com/wow/1.1.2/wow.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <!-- 开发版vue，有错误信息 -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <!-- 生产版vue，没有错误信息 -->
+    <!-- <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script> -->
+    <!-- 图表 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css">
+    <script src="https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min.js"></script>
+    <!-- 矢量字体图标 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- sweetalert弹出框 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
+
+    <!-- 百度echarts图表 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-beta.2/echarts.min.js"></script>
+    <!-- 百度echarts图表 百度地图 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-beta.2/extension/bmap.min.js"></script>
+    <!-- 百度echarts图表 关系图表 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-beta.2/extension/dataTool.min.js"></script>
+</head>
+<body>
+<style type="text/css">
+    body{
+<!--        background-color:black;-->
+        width:100%;
+    },
+    .vd{
+        width:100%;
+        height:500px;
+        margin:0 auto;
+    },
+    .v{
+     position: absolute;
+     width: 500px;
+     height: 300px;
+     margin: auto;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     background-color: green;
+    }
+</style>
+<div>
+    <ul class="content">
+
+
+
+
+    </ul>
+</div>
+<script type="text/javascript">
+   var curWwwPath = window.document.location.href;
+   var pathName = window.document.location.pathname;
+   var localhostPath=curWwwPath.substring(0, curWwwPath.indexOf(pathName));
+  window.onload=function(opetion){
+  var id = getUrlParam("id");
+  var type = getUrlParam("type");
+  console.log("type:"+type);
+  console.log("id:"+id);
+   $.ajax({
+	    type:'GET',
+	    url:localhostPath+'/mobile/queryMeterialDetails?id='+id,
+	    dataType:'json',
+	    success: function(result){
+        console.log(result);
+        for (var i = 0; i < result.length; i++) {
+        if(type==1){
+        //图片列表
+        //$(".content").append("<li><img src='${ctxPath}/static/img/filePic.png' class='img-responsive center-block'></img></li>");
+        $(".content").append("<li><img src='"+result[i].url+"' class='img-responsive center-block'></img><p>"+result[i].meterialName+"("+result[i].createDate+")</p></li>");
+
+        }
+        //视频列表
+        if(type==2){
+          console.log("jinlaile");
+          $(".content").append("<div class='vd'><p style='font-weight:900;color:white'>"+result[i].meterialName+"</p><video class='v' preload='auto' src='"+result[i].url+"' width='80%' height='400px' controls></video></div>");
+          console.log("jinruwancheng");
+        }
+        //文档资料
+       if(type==3){
+          $(".content").append("<div><a href='"+result[i].url+"'>http://121.4.58.214/shq/test1.docx</a></div>");
+        }
+	  }
+	 }
+ });
+};
+
+  function getUrlParam(name) {
+    //构造一个含有目标参数的正则表达式对象
+    var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
+    //匹配目标参数
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    } else {
+        //返回参数值
+        return "";
+    }
+}
+</script>
+</body>
+</html>

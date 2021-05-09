@@ -1,0 +1,42 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="categoryInfoForm">
+			<input type="hidden" id="id" value="${category.id}">
+			<div class="row">
+				<div class="col-sm-6 b-r">
+					&nbsp;
+					<#input type="file" id="icon" name="新图片" underline="true" />
+					&nbsp;
+					<#input disabled="disabled" id="iconOld" name="原图" value="${category.icon}" underline="true" />
+					
+					@if(!isEmpty(icon)){
+						&nbsp;
+						<!--  <img alt="image"  src="http://localhost:8080/upload_images/${category.icon}" />-->
+						<img alt="image"  src="https://www.caiufh.com/cai_images/category/${category.icon}" />
+					@}
+				</div>
+				
+			
+			</div>
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CategoryInfoDlg.editPicSubmit()" />
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CategoryInfoDlg.close()" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+img{
+	width:77px;
+	height:79px;
+	margin-left: 40px;
+}
+img:hover {
+	transform:scale(4)
+}
+</style>
+<script src="${ctxPath}/static/modular/biz/category/category_info.js"></script>
+@}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>博登</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <!-- 含有popper的bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <!-- 动画 -->
+    <script src="https://cdn.bootcss.com/wow/1.1.2/wow.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <!-- 开发版vue，有错误信息 -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <!-- 生产版vue，没有错误信息 -->
+    <!-- <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script> -->
+    <!-- 图表 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css">
+    <script src="https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min.js"></script>
+    <!-- 矢量字体图标 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- sweetalert弹出框 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
+
+    <!-- 百度echarts图表 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-beta.2/echarts.min.js"></script>
+    <!-- 百度echarts图表 百度地图 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-beta.2/extension/bmap.min.js"></script>
+    <!-- 百度echarts图表 关系图表 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-beta.2/extension/dataTool.min.js"></script>
+</head>
+<style type="text/css">
+body{
+        margin:4px;
+<!--        background:url('${ctxPath}/static/img/login-background.jpg');-->
+        background-size:cover;
+        img-responsive:center-block;
+        background-color:#155263;
+    },
+img{
+    position:relative;
+    left:24.5%;
+	width:200px;
+	height:200px;
+}
+.pic_content{
+    display:false;
+    position:absolute;
+    top:60px;
+    backgroud-color:red;
+}
+.video_content{
+    display:false;
+    position:absolute;
+    top:60px;
+    backgroud-color:red;
+}
+.doc_content{
+    display:false;
+    position:absolute;
+    top:60px;
+    backgroud-color:red;
+}
+#SSS:hover{
+      color: #112d4e;
+ }
+.imgFile{
+    word-wrap: normal|break-word;
+    border-left:2px solid #dff4f3;
+    border-right:1px solid #dff4f3;
+    border-bottom:1px solid #dff4f3;
+    border-top:1px solid #dff4f3;
+	height:300px;
+    float:left;
+}
+.fileArea{
+     width:300px;
+     height:300px;
+     background:url('${ctxPath}/static/img/fileBlue.jpg');
+     background-repeat: no-repeat;
+     background-size: cover;
+     img-responsive:center-block;
+     float:left;
+     word-wrap: normal|break-word;
+    border-left:1px solid #dff4f3;
+    border-right:1px solid #dff4f3;
+    border-bottom:1px solid #dff4f3;
+    border-top:1px solid #dff4f3;
+	margin-left:50px;
+	margin-top:30px;
+	border-radius:10px;
+}
+.nav{
+  background-color:#dde7f2;
+}
+</style>
+<body>
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+<!--        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">主页</a>-->
+        <a class="nav-item nav-link active" id="nav-picture-tab" data-toggle="tab" href="#nav-picture" role="tab" aria-controls="nav-picture" aria-selected="false" onclick="change(1)">图片资料</a>
+        <a class="nav-item nav-link" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="false" onclick="change(2)">视频资料</a>
+        <a class="nav-item nav-link" id="nav-document-tab" data-toggle="tab" href="#nav-document" role="tab" aria-controls="nav-document" aria-selected="false" onclick="change(3)">文档资料</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+<!--    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>-->
+    <div class="tab-pane fade" id="nav-picture" role="tabpanel" aria-labelledby="nav-picture-tab">
+        <div id="parent" class="pic_content"></div>
+    </div>
+    <div class="tab-pane fade" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">
+        <div id="parent1" class="video_content"></div>
+    </div>
+    <div class="tab-pane fade" id="nav-document" role="tabpanel" aria-labelledby="nav-document-tab">
+        <div id="parent2" class="doc_content"></div>
+    </div>
+
+
+</body>
+
+<script type="text/javascript">
+   var curWwwPath = window.document.location.href;
+   var pathName = window.document.location.pathname;
+   var localhostPath=curWwwPath.substring(0, curWwwPath.indexOf(pathName));
+     function change(type){
+     console.log("type"+type);
+        console.log(localhostPath);
+<!--       var thisNode=document.getElementById("SSS");-->
+<!--       var parent=document.getElementById("parent");-->
+<!--       parent.removeChild(thisNode);-->
+
+        $.ajax({
+	    type:'GET',
+	    url:localhostPath+'/mobile/queryMeterialList?type='+type,
+	    dataType:'json',
+	    success: function(result){
+        console.log(result);
+        //清空节点
+        $(".pic_content").empty();
+        $(".video_content").empty();
+        $(".doc_content").empty();
+        for (var i = 0; i < result.length; i++) {
+             console.log(i);
+             console.log(result[i].meterialName);
+            if(type==1){
+              $(".pic_content").attr("display", true);
+              $(".video_content").attr("display", false);
+              $(".doc_content").attr("display", false);
+              $(".pic_content").append("<div class='fileArea' id='SSS' onclick='toMeterialList("+result[i].id+","+type+")' class='imgFile'><p style='background-color:white;margin=0px'>"+result[i].meterialName+"("+result[i].createDate+")</p></div>");
+            }else if(type==2){
+              console.log("shipiun");
+              $(".video_content").attr("display", true);
+              $(".pic_content").attr("display", false);
+              $(".doc_content").attr("display", false);
+              $(".video_content").append("<div class='fileArea' id='SSS' onclick='toMeterialList("+result[i].id+","+type+")' class='imgFile'><p style='background-color:white;margin=0px'>"+result[i].meterialName+"("+result[i].createDate+")</p></div>");
+            }else if(type==3){
+              console.log("shipiun");
+              $(".doc_content").attr("display", true);
+              $(".pic_content").attr("display", false);
+              $(".video_content").attr("display", false);
+              $(".doc_content").append("<div class='fileArea' id='SSS' onclick='toMeterialList("+result[i].id+","+type+")' class='imgFile'><p style='background-color:white;margin=0px'>"+result[i].meterialName+"("+result[i].createDate+")</p></div>");
+            }
+
+	    }
+	    }
+	   });
+   };
+  function toMeterialList(id,type,fileName){
+      window.location.href=localhostPath+'/check/queryMeterialListHtml?id='+id+'&&type='+type;
+  };
+  window.onload=function(){
+    change(1);
+    showTab();
+  }
+  function showTab(){
+    $("#nav-picture").tab("show")
+  }
+
+</script>
+</html>

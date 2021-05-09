@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingoin.king.modular.biz.dao.MeterialTypeMapper">
+
+	<select id="selectMeterialTypeList" resultType="java.util.Map">
+		SELECT
+		a.id,
+		a.type_name as typeName,
+		a.remark,
+		a.create_by as createBy,
+		a.create_date as createDate
+
+<!--		CASE-->
+<!--		WHEN b.type = 1 THEN-->
+<!--		'图片资料'-->
+<!--		WHEN	b.type = 2 THEN-->
+<!--		'视频资料'-->
+<!--		WHEN-->
+<!--		b.type = 3 THEN-->
+<!--		'文档资料'-->
+<!--		END AS type-->
+		FROM
+		tt_material_type a
+		WHERE
+		1 = 1
+		AND a.is_valid = 1
+		<if test="condition!=null and condition!=''">
+		and a.type_name like '%${condition}%'
+		</if>
+		order by a.create_date desc
+	</select>
+</mapper>

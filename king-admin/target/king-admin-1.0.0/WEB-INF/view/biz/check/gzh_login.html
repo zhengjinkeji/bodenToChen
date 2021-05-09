@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台登录</title>
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<!-- load css -->
+	<<link rel="stylesheet" href="${ctxPath}/static/css/layui.css"  media="all">
+	<link rel="stylesheet" type="text/css" href="${ctxPath}/static/css/gzhlogin.css" media="all">
+</head>
+<style type="text/css">
+	.smsCode{
+		position:absolute;
+		right:0;
+		height:100%;
+		width:30%
+	}
+</style>
+<body>
+<div class="layui-canvs"></div>
+<div class="layui-layout layui-layout-login">
+	<h1>
+		 <strong>用户登录</strong>
+		 <em>user login</em>
+	</h1>
+	<div class="layui-user-icon larry-login">
+		 <input id="mobilePhone" type="text" placeholder="电话号码" class="login_txtbx"/>
+	</div>
+<!--	<div class="layui-pwd-icon larry-login">-->
+<!--		 <input type="password" placeholder="密码" class="login_txtbx"/>-->
+<!--	</div>-->
+    <div class="layui-val-icon larry-login">
+		<input type="text" id="code" name="code" placeholder="验证码" maxlength="6" class="login_txtbx">
+		<button class="smsCode" id="verifyImg"  onclick="sendSmsCode()">发送验证码</button>
+    </div>
+    <div class="layui-submit larry-login">
+    	<input onclick="userLogin()" type="button" value="立即登陆" class="submit_btn"/>
+    </div>
+<!--    <div class="layui-login-text">-->
+<!--    	<p>© 2016-2017 Larry 版权所有</p>-->
+<!--        <p>鄂B2-20080225-1 <a href="http://demo.larrycms.com" title="">larrycms.com</a></p>-->
+<!--    </div>-->
+</div>
+<script type="text/javascript" src="${ctxPath}/static/js/layui.all.js"></script>
+<script type="text/javascript" src="${ctxPath}/static/js/gzhlogin.js"></script>
+<script type="text/javascript" src="${ctxPath}/static/js/jparticle.jquery.js"></script>
+<script type="text/javascript">
+var curWwwPath = window.document.location.href;
+var pathName = window.document.location.pathname;
+var localhostPath=curWwwPath.substring(0, curWwwPath.indexOf(pathName))+"/boden";
+<!--var localhostPath=curWwwPath.substring(0, curWwwPath.indexOf(pathName));-->
+$(function(){
+	$(".layui-canvs").jParticle({
+<!--		background: "#141414",-->
+<!--		color: "#E6E6E6",-->
+		position:"fixed",
+		top:0,
+		left:0
+	});
+	$("html").css("overflow","hidden");
+});
+
+<!--	//登录链接测试，使用时可删除-->
+<!--$(".submit_btn").click(function(){-->
+<!--	location.href=localhostPath+"/check/gzhRegister";-->
+<!--});-->
+var smsCode = "";
+function sendSmsCode(){
+     //$('#verifyImg').attr('disabled',"true");
+     $('#verifyImg').prop('disabled',true)
+	 var mobilePhone = $("#mobilePhone").val();
+	 if(mobilePhone==''||mobilePhone==""){
+	 	alert("未输入电话号码!");
+	 	 $('#verifyImg').prop('disabled',false)
+	 	return;
+	 }
+	var regMobilePhone = new RegExp(/^1[34578]\d{9}$/);
+     if (!(regMobilePhone.test(mobilePhone))){
+            $("#mobilePhone").val('');
+            alert("电话号码格式有误,请重新输入!");
+            $('#verifyImg').prop('disabled',false)
+            return;
+         }
+
+	 console.log(mobilePhone);
+	 $.ajax({
+	    type:'GET',
+	    url:localhostPath+'/mobile/sendSmsCode?mobilePhone='+mobilePhone,
+	    dataType:'json',
+	    success: function(result){
+        console.log(result);
+          console.log(result);
+          if(result.code==200){
+			smsCode=result.smsCode;
+			console.log(smsCode);
+			var second = 60;
+			var timer = null;
+			 //先禁用
+
+			timer = setInterval(function() {
+			    second -= 1;
+			    if (second > 0) {
+			       $("#verifyImg").html(second+'后重新获取验证码');
+			    } else {
+			         clearInterval(timer);
+			       　$("#verifyImg").html('重新获取验证码');
+			        $('#verifyImg').prop('disabled',false)
+			    }
+			}, 1000);
+		 //解除禁用
+          }
+        }
+     });
+}
+function userLogin(){
+     var code = $("#code").val();
+     if(code==""||code!=smsCode){
+	 	alert("验证码错误!");
+	 	return;
+	 }
+	 var mobilePhone = $("#mobilePhone").val();
+	 if(mobilePhone==''||mobilePhone==""){
+	 	alert("未输入电话号码!");
+	 	return;
+	 }
+	 console.log(mobilePhone);
+	 $.ajax({
+	    type:'GET',
+	    url:localhostPath+'/mobile/loginWxCommon?mobilePhone='+mobilePhone,
+	    dataType:'json',
+	    success: function(result){
+          console.log(result);
+          if(result.code==200){
+            location.href=localhostPath+"/check/scanQrCode";
+          }else{
+             location.href=localhostPath+"/check/gzhRegister?mobilePhone="+mobilePhone;
+          }
+
+        }
+        });
+}
+
+</script>
+</body>
+</html>

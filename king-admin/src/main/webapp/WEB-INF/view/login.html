@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>博登小程序管理系统 - 登录</title>
+
+    <link rel="shortcut icon" href="${ctxPath}/static/boden.png">
+    <link href="${ctxPath}/static/custom/css/entry.css" rel="stylesheet">
+    <link href="${ctxPath}/static/custom/css/iframe_login.css" rel="stylesheet">
+    <link href="${ctxPath}/static/custom/css/login.css" rel="stylesheet">
+    
+    <script>if (window.top !== window.self) {
+        window.top.location = window.location;
+    }</script>
+    
+    <script src="${ctxPath}/static/custom/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="${ctxPath}/static/custom/js/jsencrypt.min.js" type="text/javascript"></script>
+    <script src="${ctxPath}/static/custom/js/jquery.login.js" type="text/javascript"></script>
+</head>
+
+<body class="ic_mini">
+<!--[if lte IE 6]><br/><div class='alert alert-block' style="text-align:left;padding-bottom:10px;"><a class="close" data-dismiss="alert">x</a><h4>温馨提示：</h4><p>你使用的浏览器版本过低。为了获得更好的浏览体验，我们强烈建议您 <a href="http://browsehappy.com" target="_blank">升级</a> 到最新版本的IE浏览器，或者使用较新版本的 Chrome、Firefox、Safari 等。</p></div><![endif]-->
+	<!--script type="text/javascript">(function(w){if(w.screen.availWidth>=1280)document.body.className = 'wrap_1280';})(window);</script-->
+	<div class="entry">
+		<div class="entry_header">
+			<div class="entry_logo">
+				<!-- <h1><a href="#" title="CAI管理系统"><img src="${ctxPath}/static/custom/images/logo_login.png" alt="金山区综合帮扶人群监测管理系统"/><span class="hidden">CAI管理系统</span></a></h1> -->
+			</div>
+		</div>
+		<div class="entry_body">
+			<div class="entry_body_inner">
+				<div class="entry_col1">
+				    <a target="_blank" id="id_img_a" href="#" >
+				    <img  src="${ctxPath}/static/custom/images/ywgs.jpg" id="id_img" width='500px' height='404px' /></a>
+				</div>
+				<div class="entry_col2">
+					<div class="entry_iframe">
+					<div class="mod_login" id="mod_login_wrap">
+                       <div class="mod_login_area" id="mod_login_con">
+                           <div class="mod_login_yx" >
+                               <h2 class="mod_login_tit">登录</h2>
+                               <div class="mod_login_form">
+                                   <div id="_login_div_quick_">
+                                       <div class="login_no_qlogin" id="login">
+                                           <div class="web_qr_login" id="web_qr_login">
+                                               <div class="web_qr_login_show" id="web_qr_login_show">
+                                                   <div class="web_login" id="web_login">
+                                                       <div class="tips" id="tips">
+                                                        @if(isEmpty(tips)){
+                                                          <div class="error_tips hide" id="error_tips">
+                                                        @}else{
+                                                          <div class="error_tips" id="error_tips">
+                                                        @}
+                                                              <span class="error_logo" id="error_logo"></span>
+                                                               <span class="err_m" id="err_m">${tips!}</span>
+                                                           </div>
+                                                           <div class="operate_tips" id="operate_tips">
+                                                               <span class="operate_content">请输入用户名</a>
+                                                               </span>
+                                                               <span class="down_row"></span>
+                                                           </div>
+                                                           <div class="loading_tips" id="loading_tips">
+                                                                <span id="loading_wording">加载中</span>
+                                                                <img src="${ctxPath}/static/custom/images/load.gif" alt="加载中..." />
+                                                           </div>
+                                                       </div>
+                        <div class="login_form">
+                            <form id="loginForm" name="loginForm" action="${ctxPath}/login" method="post" target="_self">
+                                <div class="uinArea" id="uinArea">
+                                    <label class="input_tips" id="uin_tips" for="u">用户名</label>
+                                    <div class="inputOuter">
+                                        <input type="text" class="inputstyle" id="u" name="username" value="" tabindex="1" />
+                                        <a class="uin_del" id="uin_del" href="javascript:void(0);"></a>
+                                    </div>
+                                    <ul class="email_list" id="email_list"></ul>
+                                </div>
+                                <div class="pwdArea" id="pwdArea">
+                                    <label class="input_tips" id="pwd_tips" for="p">密码</label>
+                                    <div class="inputOuter">
+                                        <input type="password" class="inputstyle password" id="p" name="password" value="" maxlength="16" tabindex="2" />
+                                    </div>
+                             
+                                </div>
+								<div class="checkArea" id="checkArea">
+								    <ul>
+								        @if(kaptcha.getKaptchaOnOff() == true){
+								        <li>
+								           <div class="mod_login_code">
+													<span class="hidden">验证码</span>
+													<input type="text"  id="k" name="kaptcha" placeholder="验证码" required="" style="font-weight:bold;width:95px;margin-bottom:0;" tabindex="3"/>
+                                                    <img src="${ctxPath}/kaptcha" id="kaptcha" class="mid validateCode" width="100px" height="32px"/>
+											</div>
+								        
+								        </li>
+								    
+								        @}
+										<li style="display:block">
+											<div class="mod_login_rember" id="mod_login_rember">
+												<label for="rememberMe">
+														<span class="mod_login_check_wrap" mo-action="trigger-security-tip" id="mod_login_check_wrap">
+															<span class="mod_login_check" style="border-radius: 4px 4px 0 0;border:none;">
+															<input tabindex="4" class="fm_check" action="check_low_login" mo-action="trigger-security-tip" type="checkbox" id="remember" name="remember"/></span>
+															<span mo-action="trigger-security-tip">记住我</span>
+														</span>
+												</label>
+												<a href="#" class="ico_doubt" target="_blank"></a>
+					  
+											</div>
+										</li>
+									</ul>
+								</div>
+                                <div class="item item-fore5">
+                                   <div class="login-btn">
+                                        <a href="javascript:void(0)" class="btn-img btn-entry" id="login_button" tabindex="6">登录</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+            
+                    </div>
+					    <script type="text/javascript">
+							$(document).ready(function() {
+							    $.login();
+							}); 
+						</script>
+       
+                </div>
+            </div>
+        </div>
+    </div>
+
+			
+            
+               
+            </div>
+
+        </div>
+
+        
+        <div id="qq_login_fail" class="mod_login_fail" type="qq_login_fail" style="display:none">
+            <i class="mod_login_fail_ico"></i>
+            <div class="mod_login_fail_con">
+                <h4>登录失败</h4>
+                <p>很抱歉，因系统繁忙，导致您登录失败<br>请您重新登录</p>
+                <p><a href="#onlink" action="refresh_qq_login" class="mod_login_submit radius-input">重新登录</a></p>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="mod_login_type">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+</div>
+
+					
+
+				</div>
+
+			</div>
+
+		</div>
+	
+	
+	</div>
+	<!--footer-->
+
+<!--S 版权 -->
+<div class="entry_footer c_tx3">
+    <p><span>Copyright&copy;2019 正锦科技研制</span><span>博登小程序管理系统V1.0</span></p>
+</div>
+<!--E 版权 -->
+<!--/footer-->
+<script>
+    $(function () {
+        $("#kaptcha").on('click', function () {
+            $("#kaptcha").attr('src', '${ctxPath}/kaptcha?' + Math.floor(Math.random() * 100)).fadeIn();
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

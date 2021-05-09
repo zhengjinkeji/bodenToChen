@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingoin.king.modular.biz.dao.OrderMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap"
+		type="com.kingoin.king.modular.biz.model.Order">
+		<id column="id" property="id" />
+		<result column="order_num" property="orderNum" />
+		<result column="price" property="price" />
+		<result column="user_id" property="userId" />
+		<result column="lin_man" property="linMan" />
+		<result column="address" property="address" />
+		<result column="mobile" property="mobile" />
+		<result column="remark" property="remark" />
+		<result column="date_add" property="dateAdd" />
+		<result column="status" property="status" />
+		<result column="date_finish" property="dateFinish" />
+		<result column="scores" property="scores" />
+		<result column="tracking_code" property="trackingCode" />
+		<result column="tracking_num" property="trackingNum" />
+		<result column="voucher" property="voucher" />
+		<result column="date_close" property="dateClose" />
+		<result column="pay_type" property="payType" />
+		<result column="xidou" property="xidou" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, order_num orderNum, price, user_id userId, lin_man linMan,
+		address,mobile,remark,date_add dateAdd,status,date_finish dateFinish,
+		scores,tracking_code trackingCode,tracking_num trackingNum,voucher,
+		date_close dateClose,pay_type payType,xidou
+	</sql>
+
+	<select id="selectOrders" resultType="map"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from biz_item_order where id > 0
+		<if test="condition != null and condition!=''">
+		and order_num like CONCAT('%',#{condition},'%')
+		</if>
+		<if test="currentStatus != null and currentStatus !=''">
+		and status = #{currentStatus}
+		</if>
+		order by id desc
+	</select>
+	<!-- 查询快递公司 -->
+	<select id="selectTrackings" resultType="map">
+		SELECT * FROM  biz_tracking
+	</select>
+	<!-- 查询单个订单byid -->
+	<select id="selectOrderDetailById" resultType="map"
+		parameterType="java.lang.Integer">
+		select * from biz_item_order where id = #{id}
+	</select>
+	<!-- 查询订单详情 -->
+	<select id="selectOrderDetail" resultType="map"
+		parameterType="java.lang.String">
+		select * from biz_item_order_detail where order_num =
+		#{orderNum}
+	</select>
+	<!-- 定时关闭超时订单 -->
+	<select id="selectCloseOrder" resultType="java.lang.Integer">
+		SELECT id FROM biz_item_order  where status = '0' and date_close &lt; now()
+	</select>
+	<update id="closeOrder" >
+		update biz_item_order set `status` = '5' 
+			where id in 
+			<foreach collection="list" index="index" item="i" open="("
+                 separator="," close=")">
+            #{i}
+        </foreach>
+	</update>
+	<!-- 返回商品库存 -->
+	<update id="updateBasicinfoStoreById" parameterType="java.lang.Integer">
+		update biz_basicinfo set store = (store + #{num}),number_orders = (number_orders - #{num}) where id = #{id}
+	</update>
+	<!-- 返回用户喜豆 -->
+	<update id="updateUserIntegralById" parameterType="java.lang.Integer">
+		update sys_user set integral = (integral + #{xidou}) where id = #{id}
+	</update>
+	<!-- 新增流水 -->
+	<insert id="insertXidouRecord">
+		INSERT INTO 
+			biz_xidou_record
+			(user_id,order_num,type,xidou,balance,datetime) 
+			VALUES(#{userId},#{orderNum},#{typeStr},#{xidou},#{balance},now())
+	</insert>
+	<!-- 删除订单详情 -->
+	<delete id="deleteDetailByNum" parameterType="java.lang.String">
+		DELETE from `biz_item_order_detail` where order_num = #{orderNum}
+	</delete>
+	<!-- 返还规格库存 -->
+	<update id="updateSpecStoreById" parameterType="java.lang.Integer">
+		update biz_specification set store = (store + #{num}) where id = #{id}
+	</update>
+</mapper>

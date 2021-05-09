@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingoin.king.modular.biz.dao.CheckMapper">
+
+	<!-- 查询新注册用户 -->
+	<select id="selectRegisterUser" resultType="map" parameterType="java.lang.String">
+		select * from sys_user where status = 4 
+		<if test="title != null and title != ''">
+			and (account like CONCAT('%',#{title},'%'))
+		</if>
+	</select>
+	
+	<!-- 查询新注册用户详情 -->
+	<select id="selectRegisterUserInfo" resultType="map" parameterType="java.lang.String">
+		select * from biz_user_info where account = #{account}
+	</select>
+	
+</mapper>

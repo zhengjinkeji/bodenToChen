@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingoin.king.modular.biz.dao.AppMapper">
+
+	<!-- 查询启动页 -->
+	<select id="selectStartPics" resultType="map">
+		select * from biz_banner
+		where status=1 and type=3
+	</select>
+
+	<!-- 查询首页banner -->
+	<select id="selectIndexBanners" resultType="map">
+		select * from
+		biz_banner where status=1 and type=1
+	</select>
+
+	<!-- 查询分类banner -->
+	<select id="selectCateBanners" resultType="map">
+		select * from
+		biz_banner where status=1 and type=2
+	</select>
+
+	<!-- 查询推荐商品 -->
+	<select id="selectRceommend" resultType="map">
+		SELECT * from biz_basicinfo where recommend = 1 and `status` = '1'
+	</select>
+
+	<!-- 添加用户资料 -->
+	<insert id="addUserInfo"
+		parameterType="com.kingoin.king.modular.biz.dto.UserInfo">
+		INSERT into biz_user_info(account,pic,pic_type)
+		VALUES(#{user.account},#{user.pic},#{user.picType})
+	</insert>
+	
+	<!-- 查询是否有封面图 -->
+	<select id="selectCoverPic" parameterType="java.lang.Integer"
+		resultType="java.lang.String">
+		select pic from biz_basicinfo_pic where basicinfo_id =
+		#{basicinfoId} and `status` !=3 and type=2 limit 0,1
+	</select>
+</mapper>

@@ -1,0 +1,27 @@
+@layout("/common/_container.html"){
+
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="">
+			
+			<div class="row">
+				<div class="col-sm-6 b-r">
+				<ul>
+				  @for(item in TracesArr!){
+					<li>${item.AcceptTime}&nbsp;&nbsp;${item.AcceptStation}</li>
+				@}
+				</ul>
+				</div>
+				<div class="col-sm-6 ">
+					&nbsp;
+					<#input disabled="disabled" id="" name="物流公司" underline="true" value="${logistic.ShipperCode}"/>
+					&nbsp;
+					<#input disabled="disabled" id="" name="物流单号" underline="true" value="${logistic.LogisticCode}"/>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+@}

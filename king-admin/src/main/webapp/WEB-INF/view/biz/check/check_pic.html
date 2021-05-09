@@ -1,0 +1,43 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="Form">
+			
+			<div class="row">
+				<div class="col-sm-6 b-r">
+					<#input disabled="disabled" id="picOld" name="身份证正面" value="${map.card1}" underline="true" />
+					&nbsp;
+					<img alt="image" id="card12" src="https://www.caiufh.com/cai_images/user_info/${map.card1}" />
+					<!-- <img alt="image" id="card12" src="http://111.229.181.74:8081/image/user_info/${map.card1}" />  -->
+					&nbsp;
+					<#input disabled="disabled" id="picOld" name="身份证反面" value="${map.card2}" underline="true" />
+					&nbsp;
+					<img alt="image" id="card12" src="https://www.caiufh.com/cai_images/user_info/${map.card2}" /> 
+					<!-- <img alt="image" id="card12" src="http://111.229.181.74:8081/image/user_info/${map.card2}" /> -->
+				</div>
+				<div class="col-sm-6 b-r">
+					<#input disabled="disabled" id="picOld" name="营业执照副本" value="${map.card3}" underline="true" />
+					&nbsp;
+					<img alt="image" id="card3" src="https://www.caiufh.com/cai_images/user_info/${map.card3}" />
+					<!-- <img alt="image" id="card3" src="http://111.229.181.74:8081/image/user_info/${map.card3}" /> -->
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<style>
+#card3{
+	width:110%;
+	height:auto;
+	padding-left:50px;
+}
+#card12{
+	width:100%;
+	height:auto;
+	padding-left:50px;
+}
+
+</style>
+<script src="${ctxPath}/static/modular/biz/banner/banner_info.js"></script>
+@}

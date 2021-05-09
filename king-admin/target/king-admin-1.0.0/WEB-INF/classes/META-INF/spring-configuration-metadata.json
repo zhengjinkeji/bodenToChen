@@ -1,0 +1,108 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.kingoin.king.config.properties.BeetlProperties",
+      "name": "beetl",
+      "type": "com.kingoin.king.config.properties.BeetlProperties"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingProperties",
+      "name": "king",
+      "type": "com.kingoin.king.config.properties.KingProperties"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingFlowableProperties",
+      "name": "king.flowable.datasource",
+      "type": "com.kingoin.king.config.properties.KingFlowableProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.kingoin.king.config.properties.BeetlProperties",
+      "name": "beetl.delimiter-statement-end",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.BeetlProperties",
+      "name": "beetl.delimiter-statement-start",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.BeetlProperties",
+      "name": "beetl.properties",
+      "type": "java.util.Properties"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.BeetlProperties",
+      "name": "beetl.resource-auto-check",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.BeetlProperties",
+      "name": "beetl.resource-tagroot",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.BeetlProperties",
+      "name": "beetl.resource-tagsuffix",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingProperties",
+      "name": "king.file-upload-path",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingFlowableProperties",
+      "defaultValue": "root",
+      "name": "king.flowable.datasource.password",
+      "description": "默认多数据源的数据库密码",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingFlowableProperties",
+      "defaultValue": "jdbc:mysql:\/\/127.0.0.1:3306\/king_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull",
+      "name": "king.flowable.datasource.url",
+      "description": "默认多数据源的链接",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingFlowableProperties",
+      "defaultValue": "root",
+      "name": "king.flowable.datasource.username",
+      "description": "默认多数据源的数据库账号",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingProperties",
+      "defaultValue": false,
+      "name": "king.kaptcha-open",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingProperties",
+      "name": "king.session-invalidate-time",
+      "description": "session 失效时间（默认为30分钟 单位：秒）",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingProperties",
+      "name": "king.session-validation-interval",
+      "description": "session 验证失效时间（默认为15分钟 单位：秒）",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingProperties",
+      "defaultValue": false,
+      "name": "king.spring-session-open",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.kingoin.king.config.properties.KingProperties",
+      "defaultValue": false,
+      "name": "king.swagger-open",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

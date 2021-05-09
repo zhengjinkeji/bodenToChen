@@ -1,0 +1,129 @@
+@layout("/common/_container.html"){
+<script src="${ctxPath}/static/lodop/LodopFuncs.js"></script>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="ibox float-e-margins">
+		<button style="cursor: pointer;" onclick="my_print()">打印订单</button>
+		 <!--startprint-->
+			<div id="PrintHTML" style="background-color: white;padding:5px 50px">
+				<table style="width: 100%;">
+					<tr>
+						<td colspan="3" style="height: 25px; text-align: center; font-weight: bold; font-size: 14px;">上海瑞徕波国际贸易有限公司</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="height: 25px; text-align: center; font-size: 14px;">小程序单</td>
+					</tr>
+					
+					<tr>
+						<td style="width: 70%; height: 25px;padding-left:20px; font-size: 12px; text-align: left;" id="Print_CustomerInformation">客户: ${user.name} 电话:${user.phone}</td>
+						<td style="width: 10%; height: 25px;"> </td>
+						<td style="width: 20%; height: 25px;padding-right:20px; font-size: 12px; text-align: right;" id="Print_DateString">NO:${order.orderNum}</td>
+					</tr>
+					<tr>
+						<td style="width: 70%;height: 25px; padding-left:20px;text-align: left; font-size: 12px;">支付方式:${order.payType}  配送方式:运费到付</td>
+						<td style="width: 10%; height: 25px;"> </td>
+						<td style="width: 20%;height: 25px;padding-right:20px; text-align: right; font-size: 12px;">状态:${order.status}</td>
+					</tr>
+					<tr>
+						
+						<td style="width: 70%;height: 25px; padding-left:20px;text-align: left; font-size: 12px;" id="Print_SendGoodsInformation">
+						[寄货]${order.trackingCode}&nbsp;:&nbsp;${order.trackingNum}&nbsp; &nbsp;${order.address}&nbsp; &nbsp;${order.linMan}&nbsp;  ${order.mobile} </td>
+						<td style="width: 10%; height: 25px;"> </td>
+						<td style="width: 20%;height: 25px;padding-right:20px; text-align: right; font-size: 12px;">下单日期:${dataAdd}</td>
+					</tr>
+				</table>
+				<table
+					style="width: 100%; border: solid 1px black; border-collapse: collapse; table-layout: fixed; margin-top: 5px;"
+					id="Print_OsaledInformation">
+					<thead>
+						<tr>
+							<th style="width: 10%; font-size: 12px; text-align: center; border: 1px solid black;">商品ID</th>
+							<th style="width: 30%; font-size: 12px; text-align: center; border: 1px solid black;">名称</th>
+							<th style="width: 30%; font-size: 12px; text-align: center; border: 1px solid black;">参数</th>
+							<th style="width: 10%; font-size: 12px; text-align: center; border: 1px solid black;">数量</th>
+							<th style="width: 10%; font-size: 12px; text-align: center; border: 1px solid black;">售价</th>
+							<th style="width: 10%; font-size: 12px; text-align: center; border: 1px solid black;">小计</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+						@for(item in orderDetail!){
+							<tr>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_id}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_name}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_label}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_num}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_price}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.total}</td>
+							</tr>
+						@}
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="4" style="font-size: 12px; height: 30px; text-align: left; border: 1px solid black; padding-left: 20px;"
+								id="Print_AmountName">实收金额(大写)：<b>${result}</b></td>
+							<td colspan="2" style="font-size: 12px; text-align: left; border: 1px solid black; padding-left: 20px;" id="Print_osaled_earnest">${order.price}</td>
+						</tr>
+						<tr>
+							<td rowspan="1" colspan="6" style="font-size: 12px; height: 50px; border: 1px solid black;">&nbsp;&nbsp;备注&nbsp;:&nbsp;${order.remark}</td>
+						</tr>
+						
+					</tfoot>
+				</table>
+				<table style="width: 100%; table-layout: fixed; margin-top: 20px;">
+					<tr>
+						<td
+							style="width: 60%; height: 25px; font-size: 12px; text-align: left; font-weight: bold;">客户须知
+							<ol>
+								<li>如过出货日期仍未收到我们的到货通知，请尽快联系我们的客服中心，查询定单具体情况。</li>
+							</ol>
+						</td>
+						<td style="width: 1%; height: 25px;"></td>
+						<td style="width: 39%; height: 25px; font-size: 12px; text-align: center; vertical-align: middle;">上海闵行区浦江镇联航路1505弄复地浦江中心1号楼306室<br /> 
+							客服电话：400-000-0000<br /> 网站：http://fx.china-boden.com
+						</td>
+					</tr>
+				</table>
+				<table
+					style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+					<tr >
+						<td style="font-size: 12px; text-align: left;padding-bottom:10px">操作人：${shiroUser.name}</td>
+					</tr>
+					<tr>
+						<td style="font-size: 12px; text-align: left;">销售（签字）：<input
+							type="text" style="border: 0px; border-bottom: 1px solid black;" /></td>
+						<td style="font-size: 12px; text-align: left;">顾客（签字）：<input
+							type="text" style="border: 0px; border-bottom: 1px solid black;" /></td>
+						<td style="font-size: 12px; text-align: right;padding-right:20px;">日期:${date}</td>
+					</tr>
+				</table>
+			</div>
+		<!--endprint-->
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+function my_print()
+{  
+  //直接调用浏览器打印功能
+   bdhtml=window.document.body.innerHTML; 
+   //定义打印区域起始字符，根据这个截取网页局部内容     
+   sprnstr="<!--startprint-->"; //打印区域开始的标记
+   eprnstr="<!--endprint-->";   //打印区域结束的标记  
+   prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17);      
+   prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); 
+   //还原网页内容     
+   window.document.body.innerHTML=prnhtml;   
+   //开始打印
+   window.print();
+}
+
+	
+</script>
+
+<script src="${ctxPath}/static/modular/biz/order/order.js"></script>
+
+@}

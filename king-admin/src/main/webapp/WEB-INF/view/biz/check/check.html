@@ -1,0 +1,39 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>新用户审核管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="title" name="账户名" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="Check.search()"/>
+                                <#button name="重置" icon="fa-trash" clickFun="Check.resetSearch()" space="true"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="roleTableToolbar" role="group">
+                            <#button name="通过"   icon="fa-check-square-o" clickFun="Check.pass()" space="true"/>
+                            <#button name="驳回"  icon="fa-remove" clickFun="Check.reject()" space="true"/>
+                        </div>
+                        <#table id="checkTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+img{
+	width:47px;
+	height:auto;
+}
+</style>
+<script src="${ctxPath}/static/modular/biz/check/check.js"></script>
+@}
+

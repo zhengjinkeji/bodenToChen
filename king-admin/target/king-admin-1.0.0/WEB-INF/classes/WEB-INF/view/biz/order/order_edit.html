@@ -1,0 +1,50 @@
+@layout("/common/_container.html"){
+
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="orderInfoForm">
+			<input type="hidden" id="id" value="${order.id}">
+			<input type="hidden" id="status" value="${order.status}">
+			<input type="hidden" id="trackingCodeVal" value="${order.trackingCode}">
+			<div class="row">
+				<div class="col-sm-6 b-r">
+					&nbsp;
+					<#input disabled="disabled" id="orderNum" name="订单编号" underline="true" value="${order.orderNum}"/>
+					&nbsp;
+					<#input disabled="disabled" id="userName" name="用户名" value="${userName}" underline="true" />
+					&nbsp;
+					<#input id="mobile" name="联系电话"  underline="true" value="${order.mobile}"/>
+					&nbsp;
+					<#select id="trackingCode" name="物流公司" underline="true">
+						<option value="">请选择</option>
+						@for(item in trackings!){
+							<option  value="${item.code}" >${item.name}&nbsp;${item.code}</option>
+						@}
+					</#select>
+					
+				</div>
+				<div class="col-sm-6">
+					&nbsp;
+					<#input id="price" name="金额"  underline="true" value="${order.price}"/>
+					&nbsp;
+					<#input id="linMan"  name="联系人" underline="true" value="${order.linMan}"/>
+					&nbsp;
+					<#input id="address" name="地址" underline="true" value="${order.address}" />
+					&nbsp;
+					<#input id="trackingNum" name="物流单号" underline="true" value="${order.trackingNum}" />
+				</div>
+			</div>
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="OrderInfoDlg.editSubmit()" />
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="OrderInfoDlg.close()" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+
+</style>
+<script src="${ctxPath}/static/modular/biz/order/order_info.js"></script>
+@}

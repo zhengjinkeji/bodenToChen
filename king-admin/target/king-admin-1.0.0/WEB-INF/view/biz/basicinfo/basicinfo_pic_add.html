@@ -1,0 +1,34 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="picInfoForm">
+			<input type="hidden" id="basicinfoId" value="${basicinfoId}">
+			<div class="row">
+				<div class="col-sm-6 b-r">
+					&nbsp;
+					<#input type="file" id="pic" name="新图片" underline="true" />
+				</div>
+				
+			
+			</div>
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="PicInfoDlg.addSubmit()" />
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="PicInfoDlg.close()" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+img{
+	width:77px;
+	height:79px;
+	margin-left: 40px;
+}
+img:hover {
+	transform:scale(4)
+}
+</style>
+<script src="${ctxPath}/static/modular/biz/basicinfo/pic_info.js"></script>
+@}

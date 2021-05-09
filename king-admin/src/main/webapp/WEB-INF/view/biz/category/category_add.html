@@ -1,0 +1,62 @@
+@layout("/common/_container.html"){
+
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="categoryInfoForm">
+			<input type="hidden" id="id" value="">
+			<div class="row">
+				<div class="col-sm-6 b-r">
+					<div id="">
+						&nbsp;
+						<#input id="name" name="名称" underline="true" />
+						<!-- &nbsp;
+						<#input id="num" type="number" name="序号" underline="true" /> -->
+						
+						&nbsp;
+						<#input type="file" id="icon" name="图标" underline="true" />
+						&nbsp;
+						<#input id="remark" name="说明" underline="true" />
+						
+					</div>
+				</div>
+				<div class="col-sm-6">
+					
+					<div id="driverInfoContent">
+						&nbsp;
+						<#select id="status" name="状态" underline="true">
+							<option value="">请选择</option>
+							<option value="1">启用</option>
+							<option value="2">冻结</option>
+						</#select>
+						<!-- <input type="file" id="file1" name="file1" > -->
+						
+						&nbsp;
+						<#select id="level" name="层级" underline="true">
+							<option value="">请选择</option>
+							<option value="1">导航栏</option>
+							<option value="2">菜单栏</option>
+						</#select>
+						&nbsp;
+						<#select id="pid" name="上级类别" underline="true" >
+							<option  value="" >请选择</option>
+							<option  value="0" >顶级</option>
+							@for(item in categorys!){
+								<option  value="${item.id}" >${item.name}</option>
+							@}
+						</#select>
+					</div>
+					
+					
+				</div>
+			</div>
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CategoryInfoDlg.addSubmit()" />
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CategoryInfoDlg.close()" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="${ctxPath}/static/modular/biz/category/category_info.js"></script>
+@}

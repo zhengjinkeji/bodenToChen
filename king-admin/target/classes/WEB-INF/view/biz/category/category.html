@@ -1,0 +1,46 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>类别管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="name" name="名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="Category.search()"/>
+                                <#button name="重置" icon="fa-trash" clickFun="Category.resetSearch()" space="true"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="CategoryTableToolbar" Category="group">
+                        	<#button name="添加" style="margin-top:30px;" icon="fa-plus" clickFun="Category.openAdd()" space="true"/>
+                            <#button name="修改" style="margin-top:30px;" icon="fa-edit" clickFun="Category.openChange()" space="true"/>
+                            <#button name="删除" style="margin-top:30px;" icon="fa-remove" clickFun="Category.del()" space="true"/>
+                            <#button name="更新图片" style="margin-top:30px;" icon="fa-edit" clickFun="Category.editPic()" space="true"/>
+                        </div>
+                        <#table id="CategoryTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+</script>
+<style>
+img{
+	width:47px;
+	height:auto;
+}
+img:hover {
+	transform:scale(5)
+}
+</style>
+<script src="${ctxPath}/static/modular/biz/category/category.js"></script>
+@}

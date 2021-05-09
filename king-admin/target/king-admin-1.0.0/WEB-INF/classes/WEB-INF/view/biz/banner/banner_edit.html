@@ -1,0 +1,65 @@
+@layout("/common/_container.html"){
+
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="banenrInfoForm">
+			<input type="hidden" id="id" value="${banner.id}">
+			<input type="hidden" id="bannerType" value="${banner.type}"> 
+			<input type="hidden" id="bannerStatus" value="${banner.status}">
+			<div class="row">
+				<div class="col-sm-6 b-r">
+					&nbsp;
+					<#input id="title" name="标题" underline="true" value="${banner.title}"/>
+					<!-- <input type="file" id="file1" name="file1" > -->
+					
+					&nbsp;
+					<#select id="type" name="类型" underline="true">
+						<option value="">请选择</option>
+						<option value="1">首页轮播</option>
+						<option value="2">分类轮播</option>
+						<option value="3">启动页</option>
+					</#select>
+					
+					&nbsp;
+					<#input disabled="disabled" id="pic" name="图片名" value="${banner.pic}" underline="true" />
+					<!-- &nbsp;
+					<img alt="image"  src="http://localhost:8080/upload_images/${banner.pic}" /> -->
+				</div>
+				<div class="col-sm-6">
+					&nbsp;
+					<#input id="businessId" type="number" name="商品ID" underline="true" value="${banner.businessId}"/>
+					&nbsp;
+					<#select id="status" name="状态" underline="true">
+						
+						<option value="">请选择</option>
+						<option value="1">启用</option>
+						<option value="2">冻结</option>
+					</#select>
+					&nbsp;
+					<#input id="remark" name="说明" underline="true" value="${banner.remark}" />
+					<!-- <#input disabled="disabled" id="pic" name="图片名" value="${banner.pic}" underline="true" />
+					 -->
+					<!-- <#input type="file" id="pic" name="图片" underline="true" /> -->
+				</div>
+			</div>
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BannerInfoDlg.editSubmit()" />
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BannerInfoDlg.close()" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+img{
+	width:77px;
+	height:79px;
+	margin-left: 40px;
+}
+img:hover {
+	transform:scale(4)
+}
+</style>
+<script src="${ctxPath}/static/modular/biz/banner/banner_info.js"></script>
+@}

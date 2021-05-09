@@ -1,0 +1,141 @@
+@layout("/common/_container.html"){
+<script src="${ctxPath}/static/lodop/LodopFuncs.js"></script>
+<object id="LODOP_OB"
+	classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width="0"
+	height="0">
+	<embed id="LODOP_EM" type="application/x-print-lodop" width="0"
+		height="0" pluginspage="${ctxPath}/static/lodop/install_lodop.exe"></embed>
+</object><!-- 停用 -->
+<div class="row">
+	<div class="col-sm-12">
+		<div class="ibox float-e-margins">
+		<button style="cursor: pointer;" onclick="preview()">打印</button>
+			<div id="PrintHTML" style="background-color: white;padding:5px 50px">
+				<table style="width: 100%;">
+					<tr>
+						<td colspan="3" style="height: 25px; text-align: center; font-weight: bold; font-size: 14px;">上海瑞徕波国际贸易有限公司</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="height: 25px; text-align: center; font-size: 14px;">小程序单</td>
+					</tr>
+					
+					<tr>
+						<td style="width: 70%; height: 25px;padding-left:20px; font-size: 12px; text-align: left;" id="Print_CustomerInformation">客户: ${user.name} 电话:${user.phone}</td>
+						<td style="width: 10%; height: 25px;"> </td>
+						<td style="width: 20%; height: 25px;padding-right:20px; font-size: 12px; text-align: right;" id="Print_DateString">NO:${order.orderNum}</td>
+					</tr>
+					<tr>
+						<td style="width: 70%;height: 25px; padding-left:20px;text-align: left; font-size: 12px;">支付方式:${order.payType}  配送方式:运费到付</td>
+						<td style="width: 10%; height: 25px;"> </td>
+						<td style="width: 20%;height: 25px;padding-right:20px; text-align: right; font-size: 12px;">状态:${order.status}</td>
+					</tr>
+					<tr>
+						
+						<td style="width: 70%;height: 25px; padding-left:20px;text-align: left; font-size: 12px;" id="Print_SendGoodsInformation">
+						[寄货]${order.trackingCode}&nbsp;:&nbsp;${order.trackingNum}&nbsp; &nbsp;${order.address}&nbsp; &nbsp;${order.linMan}&nbsp;  ${order.mobile} </td>
+						<td style="width: 10%; height: 25px;"> </td>
+						<td style="width: 20%;height: 25px;padding-right:20px; text-align: right; font-size: 12px;">下单日期:${dataAdd}</td>
+					</tr>
+				</table>
+				<table
+					style="width: 100%; border: solid 1px black; border-collapse: collapse; table-layout: fixed; margin-top: 5px;"
+					id="Print_OsaledInformation">
+					<thead>
+						<tr>
+							<th style="width: 10%; font-size: 12px; text-align: center; border: 1px solid black;">商品ID</th>
+							<th style="width: 30%; font-size: 12px; text-align: center; border: 1px solid black;">名称</th>
+							<th style="width: 30%; font-size: 12px; text-align: center; border: 1px solid black;">参数</th>
+							<th style="width: 10%; font-size: 12px; text-align: center; border: 1px solid black;">数量</th>
+							<th style="width: 10%; font-size: 12px; text-align: center; border: 1px solid black;">售价</th>
+							<th style="width: 10%; font-size: 12px; text-align: center; border: 1px solid black;">小计</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+						@for(item in orderDetail!){
+							<tr>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_id}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_name}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_label}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_num}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.goods_price}</td>
+							<td style="font-size: 12px; text-align: center; border: 1px solid black;">${item.total}</td>
+							</tr>
+						@}
+					</tbody>
+					<tfoot>
+						<tr>
+							<td rowspan="1" colspan="7" style="font-size: 12px; height: 50px; border: 1px solid black;">&nbsp;&nbsp;备注&nbsp;:&nbsp;${order.remark}</td>
+						</tr>
+						<tr>
+							<td colspan="5" style="font-size: 12px; height: 30px; text-align: left; border: 1px solid black; padding-left: 20px;"
+								id="Print_AmountName">实收金额(大写)：<b>${result}</b></td>
+							<td colspan="1" style="font-size: 12px; text-align: left; border: 1px solid black; padding-left: 20px;" id="Print_osaled_earnest">${order.price}</td>
+						</tr>
+					</tfoot>
+				</table>
+				<table style="width: 100%; table-layout: fixed; margin-top: 20px;">
+					<tr>
+						<td
+							style="width: 60%; height: 25px; font-size: 12px; text-align: left; font-weight: bold;">客户须知
+							<ol>
+								<li>如过出货日期仍未收到我们的到货通知，请尽快联系我们的客服中心，查询定单具体情况。</li>
+							</ol>
+						</td>
+						<td style="width: 10%; height: 25px;"></td>
+						<td style="width: 30%; height: 25px; font-size: 12px; text-align: center; vertical-align: middle;">上海闵行区浦江镇联航路1505弄复地浦江中心1号楼306室<br /> 
+							客服电话：400-000-0000<br /> 网站：http://fx.china-boden.com
+						</td>
+					</tr>
+				</table>
+				<table
+					style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+					<tr>
+						<td style="font-size: 12px; text-align: left;">操作人：${shiroUser.name}</td>
+						<td style="font-size: 12px; text-align: left;">销售（签字）：<input
+							type="text" style="border: 0px; border-bottom: 1px solid black;" /></td>
+						<td style="font-size: 12px; text-align: left;">顾客（签字）：<input
+							type="text" style="border: 0px; border-bottom: 1px solid black;" /></td>
+						<td style="font-size: 12px; text-align: right;padding-right:20px;">日期:${date}</td>
+					</tr>
+					<tr>
+						<td colspan="4"
+							style="font-size: 12px; height: 40px; text-align: right;">1/1</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+	var LODOP; //声明为全局变量   
+	function preview() {
+		preview_2();
+	};
+	function preview_2() {
+		CreateOneFormPage_2();
+		LODOP.PREVIEW();
+	};
+	function CreateOneFormPage_2() {
+		LODOP = getLodop();
+		LODOP.PRINT_INIT("");
+		LODOP.SET_PRINT_STYLE("FontSize", 18);
+		LODOP.SET_PRINT_STYLE("Bold", 1);
+		
+		LODOP.SET_PRINT_PAGESIZE(0, "1064", "200", "A4");//动态纸张
+		//LODOP.ADD_PRINT_TEXT(50, 231, 260, 39, "打印页面部分内容");
+		LODOP.ADD_PRINT_HTM(40, 50, 700, 1080, document
+				.getElementById("PrintHTML").innerHTML);
+		//LODOP.SET_PRINT_STYLEA(0,"Alignment",2);
+		//LODOP.SET_PRINT_STYLEA(0,"AlignJustify",1);
+		LODOP.PREVIEW();
+	};
+</script>
+
+<script src="${ctxPath}/static/modular/biz/order/order.js"></script>
+
+@}

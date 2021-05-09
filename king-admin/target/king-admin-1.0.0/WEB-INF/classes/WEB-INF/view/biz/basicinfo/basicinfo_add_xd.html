@@ -1,0 +1,65 @@
+@layout("/common/_container.html"){
+
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="basicinfoInfoForm">
+			<input type="hidden" id="id" value="">
+			<input type="hidden" id="type" value="2">
+			<div class="row">
+				<div class="col-sm-6 b-r">
+					&nbsp;
+					<#input id="name" name="名称" underline="true" />
+					<!-- <input type="file" id="file1" name="file1" > -->
+					&nbsp;
+					<#input id="box" type="number" name="箱规格" underline="true" />
+					&nbsp;
+					<#input id="numberOrders" type="number" name="已售"   underline="true" />
+					&nbsp;
+					<#input id="characteristic" name="特征" underline="true" />
+					&nbsp;
+					<#select id="categoryId" name="类别" underline="true">
+						<option  value="" >请选择</option>
+						@for(item in categorys!){
+							<option  value="${item.id}" >${item.pname}-${item.name}</option>
+						@}
+					</#select>
+					&nbsp;
+					<#select id="recommend" name="首页推荐" underline="true">
+						<option value="">请选择</option>
+							<option value="1">是</option>
+							<option value="2">否</option>
+					</#select>
+					
+					<!-- &nbsp;
+					<#input type="file" id="pic" name="图片" underline="true" /> -->
+				</div>
+				<div class="col-sm-6">
+					&nbsp;
+					<#input id="xidou"  name="喜豆价" type="number"  underline="true" />
+					&nbsp;
+					<#input id="originalPrice"  name="原价"  underline="true" />
+					&nbsp;
+					<#input id="store" type="number" name="库存"   underline="true" />
+					&nbsp;
+					<#input id="remark" name="说明" underline="true" />
+					&nbsp;
+					<#select id="status" name="状态" underline="true">
+						<option value="">请选择</option>
+							<option value="1">启用</option>
+							<option value="2">冻结</option>
+					</#select>
+					
+										
+				</div>
+			</div>
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BasicinfoInfoDlg.addSubmit()" />
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BasicinfoInfoDlg.close()" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="${ctxPath}/static/modular/biz/basicinfo/basicinfo_info_xd.js"></script>
+@}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Boden图纸</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="${ctxPath}/static/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="${ctxPath}/static/css/bootstrap.min.css">
+</head>
+<style type="text/css">
+.goods{
+	position:absolute;
+	top:0px;
+	height:50%
+}
+</style>
+<body>
+<nav>
+	<div id="list" class="container">
+		<div class='row'>
+			<div class='col-xs-12 col-sm-12'>
+				<img style="height:50%" class="img-responsive center-block" src='${ctxPath}/static/img/pallet.jpg')>
+			</div>
+
+		</div>
+	</div>
+	<div id="enter" onclick="enter()">进入博登采暖资料大全</div>
+
+
+
+</body>
+
+<script type="text/javascript">
+   var curWwwPath = window.document.location.href;
+   var pathName = window.document.location.pathname;
+   var localhostPath=curWwwPath.substring(0, curWwwPath.indexOf(pathName))+"/boden";
+ function enter(){
+   location.href=localhostPath+"/check/index";
+};
+
+  function getUrlParam(name) {
+    //构造一个含有目标参数的正则表达式对象
+    var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
+    //匹配目标参数
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    } else {
+        //返回参数值
+        return "";
+    }
+}
+</script>
+</html>

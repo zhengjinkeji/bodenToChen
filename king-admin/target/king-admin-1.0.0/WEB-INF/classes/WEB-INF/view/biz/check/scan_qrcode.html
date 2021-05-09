@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>博登</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jquery -->
+    <script src="${ctxPath}/static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="${ctxPath}/static/css/bootstrap.min.css">
+    <!-- 含有popper的bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<style type="text/css">
+body{
+   background-color: #d59bf6;
+}
+
+
+p{
+ text-align:center;
+}
+#head{
+     text-align:center;
+     color:#3490de;
+     font-size:19px;
+     height:50px;
+     background:url('${ctxPath}/static/img/head.png');
+     background-repeat: no-repeat;
+     background-size: cover;
+}
+font{
+    position:relative;
+    top:30%;
+    height:40%;
+}
+#scan{
+    position:relative;;
+    top:18%;
+    margin:0 auto;
+    left:20%;
+    width:60%;
+}
+#list{
+    position:absolute;
+    top:25%;
+    height:60%;
+}
+#remark{
+    position:absolute;
+    top:15%;
+    font-weight:bold;
+    font-color:red;
+    margin:16px;
+}
+#enter{
+    position:absolute;
+    background-color:#f0f5f9;
+    bottom:5%;
+    height:5%
+    width:94%;
+    left:22%;
+    font-color:red;
+    font-weight:bold;
+    font-size:20px;
+    border-top:3px solid #2b2e4a;
+    text-align:center;
+
+}
+</style>
+<body>
+<nav>
+    <div id="head"><font><p>获取设备信息</p></font></div>
+    <p id="remark">注意事项:点击屏幕中间图标,即可打开手机摄像头,将摄像头对准采暖设备条码完成扫描,即可获取产品信息</p>
+    <div id="list" class="container">
+        <div class='row'>
+            <div class='col-xs-12 col-sm-12'>
+                <img id="scan" src='${ctxPath}/static/img/scan.jpg')>
+            </div>
+
+        </div>
+    </div>
+    <div id="enter" onclick="enter()">进入博登采暖资料大全</div>
+
+
+
+</body>
+
+<script type="text/javascript">
+   var curWwwPath = window.document.location.href;
+   var pathName = window.document.location.pathname;
+   var localhostPath=curWwwPath.substring(0, curWwwPath.indexOf(pathName))+"/boden";
+<!--      var localhostPath=curWwwPath.substring(0, curWwwPath.indexOf(pathName));-->
+ function enter(){
+   location.href=localhostPath+"/check/index";
+};
+
+  function getUrlParam(name) {
+    //构造一个含有目标参数的正则表达式对象
+    var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
+    //匹配目标参数
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    } else {
+        //返回参数值
+        return "";
+    }
+}
+</script>
+</html>

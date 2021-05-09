@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.kingoin.king.modular.biz.dao.BasicinfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.kingoin.king.modular.biz.model.Basicinfo">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="category_id" property="categoryId" />
+		<result column="characteristic" property="characteristic" />
+		<result column="score" property="score" />
+		<result column="store" property="store" />
+		<result column="min_price" property="minPrice" />
+		<result column="original_price" property="originalPrice" />
+		<result column="number_orders" property="numberOrders" />
+		<result column="status" property="status" />
+		<result column="status_str" property="statusStr" />
+		<result column="remark" property="remark" />
+		<result column="date_add" property="dateAdd" />
+		<result column="add_user" property="addUser" />
+		<result column="date_update" property="dateUpdate" />
+		<result column="update_user" property="updateUser" />
+		<result column="recommend" property="recommend" />
+		<result column="xidou" property="xidou" />
+		<result column="type" property="type" />
+		<result column="box" property="box" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, name, category_id categoryId,
+		characteristic,score,store,min_price minPrice,
+		original_price originalPrice, number_orders numberOrders,status,
+		status_str statusStr, remark,date_add dateAdd,add_user addUser,
+		date_update dateUpdate,update_user updateUser,recommend,xidou,type,box
+	</sql>
+	<!-- 查询 品牌专业-->
+	<select id="selectBasicinfos" resultType="map"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from biz_basicinfo
+		where status !=3 and type ='1' 
+		<if test="condition != null and condition!=''">
+			and name like CONCAT('%',#{condition},'%')
+		</if>
+		<choose>
+			<when test="orderByField != null and orderByField !=''">
+				<choose>
+					<when test="isAsc == true">
+						order by ${orderByField} ASC
+					</when>
+					<otherwise>
+						order by ${orderByField} DESC
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+	</select>
+	<!-- 查询 品牌定制 -->
+	<select id="selectBasicinfoDzs" resultType="map"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from biz_basicinfo
+		where status !=3 and type ='3' 
+		<if test="condition != null and condition!=''">
+			and name like CONCAT('%',#{condition},'%')
+		</if>
+	</select>
+	<!-- 查询 喜豆商品 -->
+	<select id="selectBasicinfoXds" resultType="map"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from biz_basicinfo
+		where status !=3 and type ='2' and xidou != 0
+		<if test="condition != null and condition!=''">
+			and name like CONCAT('%',#{condition},'%')
+		</if>
+	</select>
+	<!-- 查询二级分类 品牌专业 -->
+	<select id="selectCategory" resultType="map">
+		SELECT * FROM
+		`biz_category` where status =1 and level =2 and pname ='品牌专业' 
+	</select>
+	<!-- 查询二级分类 品牌定制 -->
+	<select id="selectCategoryDz" resultType="map">
+		SELECT * FROM
+		`biz_category` where status =1 and level =2 and  pname = '品牌定制'
+	</select>
+	<!-- 查询二级分类 喜豆商品 -->
+	<select id="selectCategoryXd" resultType="map">
+		SELECT * FROM
+		`biz_category` where status =1 and level =2 and pname ='喜豆专区' 
+	</select>
+	<!-- 查询商品图片 -->
+	<select id="selectPicByBasicinfoId" resultType="map"
+		parameterType="java.lang.Integer">
+		SELECT * FROM `biz_basicinfo_pic` where status !=3 and
+		basicinfo_id =#{basicinfoId}
+	</select>
+	<!-- 添加商品图片 -->
+	<insert id="insertPic"
+		parameterType="com.kingoin.king.modular.biz.model.Picture">
+		INSERT into biz_basicinfo_pic
+		(basicinfo_id,pic,type,type_str,`status`,date_add,add_user)
+		VALUES
+		(#{picture.basicinfoId},#{picture.pic},#{picture.type},#{picture.typeStr},#{picture.status},#{picture.dateAdd},#{picture.addUser})
+	</insert>
+	<!-- 修改图片 -->
+	<update id="updatePic"
+		parameterType="com.kingoin.king.modular.biz.model.Picture">
+		update biz_basicinfo_pic set
+		`status`=#{picture.status},type=#{picture.type},type_str=#{picture.typeStr},
+		date_update=#{picture.dateUpdate},update_user=#{picture.updateUser}
+		where id = #{picture.id};
+	</update>
+	<!-- 删除图片 -->
+	<delete id="deletePicById" parameterType="java.lang.Integer">
+		delete from biz_basicinfo_pic where id = #{picId}
+	</delete>
+	<!-- 删除某商品的图片 -->
+	<delete id="deleteBasicinfoPicByBasicinfoId"
+		parameterType="java.lang.Integer">
+		delete from biz_basicinfo_pic where
+		basicinfo_id = #{basicinfoId}
+	</delete>
+	<!-- 查询是否有封面图 -->
+	<select id="selectCoverPic" parameterType="java.lang.Integer"
+		resultType="java.lang.String">
+		select pic from biz_basicinfo_pic where basicinfo_id =
+		#{basicinfoId} and `status` !=3 and type=2 limit 0,1
+	</select>
+	<!-- 取消其他封面图 -->
+	<update id="updateCoverPic">
+		update biz_basicinfo_pic set
+		type=1,date_update=now(),update_user=#{updateUser}
+		where basicinfo_id = #{basicinfoId}
+	</update>
+	<!-- 根据条件查询菜单 -->
+	<select id="getSpecIdsByBasicinfoId" resultType="long">
+		select spec_id specId from
+		biz_relation where basicinfo_id = #{basicinfoId}
+	</select>
+	<!-- 获取规格列表树 -->
+	<select id="specTreeList"
+		resultType="com.kingoin.king.core.node.ZTreeNode">
+		SELECT
+		m1.id AS id,
+		m1. NAME
+		AS NAME,
+		"false" AS isOpen
+		FROM
+		biz_specification m1 where m1.pid =0
+		ORDER BY
+		m1.id ASC
+	</select>
+	<!-- 查询某商品的规格列表树 -->
+	<select id="specTreeListBySpecIds"
+		resultType="com.kingoin.king.core.node.ZTreeNode">
+		SELECT
+		m1.id AS id,
+		m1. NAME AS NAME,
+		'false' as isOpen,
+		( CASE WHEN (m3.ID = 0 OR m3.ID IS NULL) THEN 'false' ELSE 'true' END )
+		"checked"
+		FROM biz_specification m1
+		left join (SELECT ID FROM biz_specification WHERE ID IN
+		<foreach collection="list" index="index" item="i" open="("
+			separator="," close=")">
+			#{i}
+		</foreach>
+		) m3 on m1.id = m3.id
+		where m1.pid =0
+		ORDER BY
+		m1.id ASC
+	</select>
+	<!-- 删除这个商品的所有规格 -->
+	<delete id="deleteSpecById">
+		delete from biz_relation where basicinfo_id =
+		#{basicinfoId}
+	</delete>
+	<!-- 查询数量配置 -->
+	<select id="selectBascinfoNumSpec" parameterType="java.lang.Integer" resultType="map">
+		SELECT * FROM `biz_basicinfo_num_spec` where basicinfo_id = #{basicinfoId}
+	</select>
+	<!-- 逻辑删除这个商品关联的图片 <update id="updatePicByBaiscinfoId" > update biz_basicinfo_pic 
+		set `status`=3, date_update=now(),update_user=#{updateUser} where basicinfo_id 
+		= #{basicinfoId}; </update> -->
+		
+	<!-- 添数量规格 -->
+	<insert id="addNumspec" parameterType="com.kingoin.king.modular.biz.dto.NumSpec">
+		INSERT into biz_basicinfo_num_spec(basicinfo_id,begin,end,xishu,user_id,create_time)
+		VALUES(#{ns.bid},#{ns.begin},#{ns.end},#{ns.xishu},#{ns.userId},#{ns.createtime})
+	</insert>
+	<!-- 查询数量规格 -->
+	<select id="selectNumSpecByid"  parameterType="java.lang.Integer" resultType="com.kingoin.king.modular.biz.dto.NumSpec">
+		SELECT id,basicinfo_id bid,begin,end,xishu,user_id userId ,create_time createtime
+		 FROM `biz_basicinfo_num_spec` where id = #{id}
+	</select>
+	<!-- 修改数量规格 -->
+	<update id="updateNumspec" parameterType="com.kingoin.king.modular.biz.dto.NumSpec">
+		update biz_basicinfo_num_spec set
+		begin=#{ns.begin},end=#{ns.end},xishu=#{ns.xishu},user_id=#{ns.userId},create_time=#{ns.createtime}
+		where id = #{ns.id}
+	</update>
+	<!-- 删除商品数量规格 -->
+	<delete id="deleteNumspecById"
+		parameterType="java.lang.Integer">
+		delete from biz_basicinfo_num_spec where
+		id = #{id}
+	</delete>
+</mapper>

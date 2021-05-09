@@ -1,0 +1,40 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="banenrInfoForm">
+			<input type="hidden" id="id" value="${banner.id}">
+			<div class="row">
+				<div class="col-sm-6 b-r">
+					&nbsp;
+					<#input type="file" id="pic" name="新图片" underline="true" />
+					&nbsp;
+					<#input disabled="disabled" id="picOld" name="原图" value="${banner.pic}" underline="true" />
+					&nbsp;
+					<!-- <img alt="image"  src="http://111.229.181.74:8081/image/banner/${banner.pic}" /> -->
+					<img alt="image"  src="https://www.caiufh.com/cai_images/banner/${banner.pic}" />
+					<!-- <img alt="image"  src="${ctxPath}/upload_images/banner/${banner.pic}" /> -->
+				</div>
+				
+			
+			</div>
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BannerInfoDlg.editPicSubmit()" />
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BannerInfoDlg.close()" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+img{
+	width:77px;
+	height:79px;
+	margin-left: 40px;
+}
+img:hover {
+	transform:scale(4)
+}
+</style>
+<script src="${ctxPath}/static/modular/biz/banner/banner_info.js"></script>
+@}

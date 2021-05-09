@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Boden</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="css/ratchet.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/page.css" />
+<link rel="stylesheet" type="text/css" href="css/product.css" />
+<link rel="stylesheet" type="text/css" href="css/pro2.css" />
+  <link rel="stylesheet" href="${ctxPath}/static/css//layui.css"  media="all">
+<script src="js/flex.js"></script>
+    <script src="js/jquery.min.js"></script>
+<script src="js/ratchet.min.js"></script>
+</head>
+<body>
+<header class="bar bar-nav"> <a class="icon icon-left-nav pull-left"></a> <a class="icon icon-more-vertical pull-right"></a>
+  <h1 class="title">Boden图纸</h1>
+</header>
+<div id="content">
+  <div class="scroller">
+    <div id="p-summary" class="page">
+      <div class="container">
+        <section id="s-showcase">
+          <div class="scroller">
+<!--            <img style="height:50%" class="img-responsive center-block" src='${ctxPath}/static/img/pallet.jpg')>-->
+<!--            <div class="itbox main"> <a class="item"> <img src="images/banner3.png" alt="" /> </a> </div>-->
+            <img style="height:50%" class="img-responsive center-block itbox main" src='images/pallet.jpg')>
+          </div>
+        </section>
+        <section id="s-from" class="mui-flex"> </section>
+        <section id="s-title">
+          <div class="main">
+            <p align="left">
+              全屋定制采暖设计整体解决方案，注重个性功能需求，空间利用最大化，
+              一站式学习，一站式购买，降低时间和精力成本，满足用户体验设计和交互设计
+              </br><span  style="font-weight:bold">价值体现一:</span>让您能自己核算整套地暖需要的费用
+              <br><span  style="font-weight:bold">价值体现二:</span>让您成为优质监理，专业监督，杜绝施工方偷工减料
+              <br><span  style="font-weight:bold">价值体现三:</span>让您纵观市场价格，知晓采暖行业套路后，安心享受BODEN工厂直销价</span>
+              <b r><br>千万别跟钞票干架，如果您想需求便捷、安心、舒适采暖产品，
+              请关注公众号，成为采暖小专家。避坑指南握在手，装修选择没烦恼。更多惊喜等着您！
+            </p>
+          </div>
+          <div class="sub">
+            <div class="slogon"></div>
+          </div>
+        </section>
+        <section id="s-price"> <span class="mui-price big"> <i class="mui-price-rmb">&yen;</i> <span class="mui-price-integer">50.00/份</span> <span class="mui-price-decimal"></span> </span> </section>
+        <input type="number" step="1" pattern="^[-/d]/d*$"  class="layui-input" placeholder="请输入购买数量"><span>总价:500元</span>
+        <button class="buy cell">立即购买</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+$(function () {
+    $(".clickwn").click(function () {
+        $(".flick-menu-mask").show();
+       $(".spec-menu").show();
+    })
+
+    $(".tclck").click(function () {
+       $(".flick-menu-mask").hide();
+       $(".spec-menu").hide();
+    })
+
+   /* $("#cool").focus(function(){
+        var oi = $('#cool').val();
+
+        $('.amount').html(oi)
+    });*/
+
+         $('#cool').bind('input propertychange', function () {
+           /* alert(this.value);*/
+              $('.amount').html(this.value)
+
+        }).bind('input input', function () {
+            
+        });
+
+
+        $('#color a').click(function () {
+          var cook = $(this).index();
+          $('#color a').eq(cook).addClass('selected').siblings().removeClass('selected');
+        })
+
+
+        //加减面板
+            $(function(){
+                //加号
+                $(".jia").click(function(){
+              
+                var $parent=$(this).parent(".num");
+                var $num=window.Number($(".inputBorder",$parent).val());
+                $(".inputBorder",$parent).val($num+1);
+           
+                $('.amount').html($num+1)
+               
+                });
+
+                //减号
+                $(".jian").click(function(){
+                var $parent=$(this).parent(".num");
+                var $num=window.Number($(".inputBorder",$parent).val());
+                if($num>2){
+                $(".inputBorder",$parent).val($num-1);
+                 $('.amount').html($num-1)
+
+              }else{
+                $(".inputBorder",$parent).val(1);
+                $('.amount').html($num)
+
+              
+                }
+                });
+
+      })
+           
+
+})
+</script>
+</html>

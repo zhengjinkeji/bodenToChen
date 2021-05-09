@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingoin.king.modular.biz.dao.SpecMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap"
+		type="com.kingoin.king.modular.biz.model.Specification">
+		<id column="id" property="id" />
+		<result column="num" property="num" />
+		<result column="pid" property="pid" />
+		<result column="name" property="name" />
+		<result column="type_name" property="typeName" />
+		<result column="date_add" property="dateAdd" />
+		<result column="add_user" property="addUser" />
+		<result column="date_update" property="dateUpdate" />
+		<result column="update_user" property="updateUser" />
+		<result column="store" property="store" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, num, pid, name,type_name typeName,date_add
+		dateAdd,add_user addUser,
+		date_update dateUpdate,update_user updateUser,store
+	</sql>
+
+	<!-- <select id="selectByCode" resultType="dict"> select <include refid="Base_Column_List"/> 
+		from sys_dict where pid = #{pid} </select> -->
+
+	<select id="list" resultType="map">
+		select
+		<include refid="Base_Column_List" />
+		from biz_specification
+		where pid = 0
+		<if test="condition != null and condition != ''">
+			AND name like CONCAT('%',#{condition},'%')
+		</if>
+		order by id ASC
+	</select>
+	<!-- 查询所有子类 -->
+	<select id="selectChildByPid" parameterType="java.lang.Integer"
+		resultType="map">
+		select
+		<include refid="Base_Column_List" />
+		from biz_specification
+		where pid = #{pid}
+	</select>
+	<!-- 查询字典 规格类别 -->
+	<select id="selectSpecType" parameterType="java.lang.String"
+		resultType="map">
+		select * from sys_dict where pid = (select id from sys_dict where name =
+		#{typeName})
+	</select>
+</mapper>
+
+

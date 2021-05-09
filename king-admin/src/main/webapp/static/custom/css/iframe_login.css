@@ -1,0 +1,274 @@
+﻿
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+body, button, input {
+    color: #666;
+    font: 12px/1.5 "Lucida Grande",tahoma,arial,宋体;
+}
+img, button {
+    border: 0 none;
+}
+ul {
+    list-style: none outside none;
+}
+a {
+    color: #333;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.hidden {
+    display: none;
+}
+.c_tx1 {
+    color: #999;
+}
+.fm_int {
+    border: 1px solid #d7d7d7;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 10px;
+    width: 258px;
+}
+.fm_int_mini {
+    width: 60px;
+}
+.fm_int:focus {
+    border-color: #84b0fd;
+    outline: 0 none;
+}
+
+.ico_qq, .ico_yx, .ico_wx, .ico_yj, .ico_ali, .ico_error, .mod_login_submit, .mod_login_rember_ico, .mod_login_fail_ico {
+    background-image: url("../images/login.png");
+    background-repeat: no-repeat;
+}
+.mod_login_submit {
+    background-position: 0 -27px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    height: 35px;
+    line-height: 35px;
+    overflow: hidden;
+    text-align: center;
+    width: 114px;
+}
+.mod_login_submit:hover {
+    background-position: -116px -27px;
+    text-decoration: none;
+}
+.mod_login_submit_invalid {
+    background-position: 0 -67px;
+    cursor: default;
+}
+.mod_login_tips {
+    background-color: #f9f5c7;
+    border: 1px solid #dad699;
+    line-height: 18px;
+    padding: 5px;
+    position: absolute;
+    width: 268px;
+}
+.mod_login_tips .ico_error {
+    background-position: -179px -85px;
+    display: inline-block;
+    height: 14px;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+    width: 14px;
+}
+.mod_login {
+    background-color: #fff;
+    width: 380px;
+}
+.mod_login_area {
+    height: 420px;
+    overflow: hidden;
+    position: relative;
+}
+.mod_login_yx {
+    height: 330px;
+    margin: auto;
+    position: relative;
+    width: 280px;
+}
+.mod_login_yx h2 {
+    color: #666;
+    font-family: "微软雅黑",tahoma;
+    font-size: 18px;
+    padding: 30px 0 0 0;
+}
+.mod_login_yx ul {
+}
+.mod_login_yx ul:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.mod_login_yx li {
+    display: inline;
+    float: left;
+    padding-bottom: 10px;
+    width: 100%;
+}
+.mod_login_yx li label {
+    float: left;
+}
+.mod_login_code {
+    float: left;
+}
+.mod_login_code p, .mod_login_code a, .mod_login_code img, .mod_login_code input {
+    display: inline;
+    float: left;
+}
+.mod_login_code input {
+    margin: 6px 5px 0 0;
+}
+.mod_login_code p {
+    margin: 6px 0 0 10px;
+    width: 50px;
+}
+.mod_login_rember {
+    height: 18px;
+    position: relative;
+}
+.mod_login_check_wrap {
+    padding-left: 24px;
+}
+.mod_login_check {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #fff #fff -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px 0;
+    height: 20px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -2px;
+    width: 20px;
+    z-index: 2;
+}
+.mod_login_check_on {
+    background-color: #f9f5c7;
+    border-color: #dad699;
+}
+.mod_login_check input {
+    margin: 5px 0 0 3px;
+}
+.mod_login_rember_ico {
+    background-position: -179px -85px;
+    height: 14px;
+    left: 158px;
+    position: absolute;
+    top: 3px;
+    width: 14px;
+}
+.mod_login_rember .mod_login_tips {
+    color: #ed6807;
+    left: 0;
+    top: 18px;
+}
+.mod_login_btn {
+    overflow: hidden;
+    padding-top: 20px;
+}
+.mod_login_btn button, .mod_login_btn a {
+    display: inline;
+    float: left;
+}
+.mod_login_btn a {
+    margin: 8px 0 0 20px;
+}
+.mod_login_help {
+    bottom: 249px;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    width: 280px;
+}
+.mod_login_help .mod_login_tips {
+    bottom: 2px;
+    left: 0;
+}
+.mod_login_fail {
+    padding: 50px 40px 0 90px;
+}
+.mod_login_fail_ico {
+    background-position: -198px -67px;
+    height: 32px;
+    margin-left: -32px;
+    position: absolute;
+    width: 32px;
+}
+.mod_login_fail_con {
+    line-height: 22px;
+    margin-left: 10px;
+}
+.mod_login_fail_con h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.mod_login_fail_con p {
+    margin-bottom: 15px;
+}
+.mod_login_type {
+    border-top: 1px dotted #ccc;
+    line-height: 22px;
+    padding: 10px;
+}
+.mod_login_type ul {
+    overflow: hidden;
+}
+.mod_login_type li {
+    color: #999;
+    display: inline;
+    float: left;
+}
+.mod_login_type span, .mod_login_type a {
+    display: inline;
+    float: left;
+    overflow: hidden;
+}
+.mod_login_type .ico_qq, .mod_login_type .ico_yx, .mod_login_type .ico_wx, .mod_login_type .ico_yj {
+    height: 22px;
+    margin-left: 5px;
+    text-indent: -999px;
+    width: 77px;
+}
+.mod_login_type .ico_qq {
+    background-position: 0 0;
+}
+.mod_login_type .ico_yx {
+    background-position: -82px 0;
+}
+.mod_login_type .ico_wx {
+    background-position: 0 -107px;
+}
+.mod_login_type .ico_yj {
+    background-position: -82px -107px;
+}
+.mod_login_type .ico_ali {
+    background-position: -216px 4px;
+    margin-left: 5px;
+    padding-left: 18px;
+}
+.mod_login_type_reg {
+    float: right !important;
+}
+.mod_login_type_reg a {
+    color: #3479f0;
+}
